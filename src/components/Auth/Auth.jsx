@@ -13,8 +13,6 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
-
-
 const Auth = () => {
   // const {}
   //   const { auth, setAuth } = useAuth();
@@ -178,6 +176,7 @@ const Auth = () => {
             onClick={() => {
               handleLogin();
               setAuth(!auth);
+              navigate("/");
             }}
           >
             Sign in
@@ -199,11 +198,11 @@ const Auth = () => {
                 color: "green",
                 boxShadow: "none",
               },
-            }} 
+            }}
             onClick={() => {
               setAuth(!auth);
               handleSignup();
-              navigate('/setprofile')
+              navigate("/setprofile");
             }}
           >
             Register

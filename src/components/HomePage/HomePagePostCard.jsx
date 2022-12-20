@@ -6,7 +6,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useSetProfile } from "../../contexts/SetProfileContext";
 import { useNavigate } from "react-router-dom";
 
-const HomePagePostCard = ({ post, index }) => {
+const HomePagePostCard = ({ post, index, findUser }) => {
   const {
     user: { email },
   } = useAuth();
@@ -58,7 +58,7 @@ const HomePagePostCard = ({ post, index }) => {
         <img
           width="50px"
           height="50px"
-          src={post.avatar}
+          src={findUser.avatar}
           alt=""
           style={{ borderRadius: "50%", cursor: "pointer" }}
         />
@@ -66,7 +66,7 @@ const HomePagePostCard = ({ post, index }) => {
           sx={{ ml: 1, cursor: "pointer" }}
           onClick={() => navigate(`/profile/${post.user}`)}
         >
-          {post.username}
+          {findUser.username}
         </Typography>
       </Box>
       <Typography

@@ -27,8 +27,9 @@ const ProfilePage = () => {
         display: "flex",
         mx: {
           xs: 5,
-          sm: 20,
-          md: 35,
+          sm: 15,
+          md: 20,
+          lg:35
         },
       }}
     >

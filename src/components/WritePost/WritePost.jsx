@@ -58,6 +58,7 @@ const WritePost = () => {
     timestamp: "",
     id: new Date(),
     topic: "",
+    premium: true,
   });
 
   const handleInp = (e) => {
@@ -88,7 +89,6 @@ const WritePost = () => {
 
   return (
     <Box>
-
       <input onChange={handleInp} placeholder="cover" name="cover" />
       <input onChange={handleInp} placeholder="title" name="title" />
       <input
@@ -98,7 +98,7 @@ const WritePost = () => {
         style={{ overflow: "visible", height: "fit-content" }}
       />
 
-      <FormControl sx={{ }}>
+      <FormControl sx={{}}>
         <Select
           name="topic"
           size="small"
@@ -112,6 +112,17 @@ const WritePost = () => {
 
           <MenuItem value={"politics"}>politics</MenuItem>
           <MenuItem value={"travel"}>travel</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl sx={{}}>
+        <Select
+          name="premium"
+          size="small"
+          onChange={handleInp}
+          defaultValue={"public"}
+        >
+          <MenuItem value={"public"}>public</MenuItem>
+          <MenuItem value={"member"}>member only</MenuItem>
         </Select>
       </FormControl>
 

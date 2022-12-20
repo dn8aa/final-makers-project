@@ -13,7 +13,7 @@ const HomePagePosts = ({ profiles }) => {
         minHeight: "100vh",
       }}
     >
-      <Box sx={{ display: "flex", flexWrap: "wrap", mb:3 }}>
+      <Box sx={{ display: "flex", flexWrap: "wrap", mb: 3 }}>
         <Button
           sx={{
             fontSize: 16,
@@ -127,13 +127,24 @@ const HomePagePosts = ({ profiles }) => {
         >
           travel
         </Button>
-        
       </Box>
       {profiles?.map((user, index) => (
         <div key={index}>
-          {user.posts.map((post, index) => (
-            <HomePagePostCard post={post} key={index} index={index}/>
-          ))}
+          {user.posts.map((post, index) => {
+            const findUser = profiles.find(
+              (profile) => profile.user === post.user
+            );
+            if (findUser) {
+              return (
+                <HomePagePostCard
+                  post={post}
+                  key={index}
+                  index={index}
+                  findUser={findUser}
+                />
+              );
+            }
+          })}
         </div>
       ))}
     </Box>
