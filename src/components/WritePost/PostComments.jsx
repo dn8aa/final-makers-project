@@ -42,7 +42,6 @@ const PostComments = ({ post, authorEmail, indexForMethod }) => {
   function handleInput(e) {
     setInput(e.target.value);
   }
-  
 
   function addComment() {
     let commentObj = {
@@ -55,9 +54,10 @@ const PostComments = ({ post, authorEmail, indexForMethod }) => {
     };
 
     let newProfileDetails = { ...profileDetails };
-    newProfileDetails.posts[indexForMethod].comments.push(commentObj);
+    newProfileDetails.posts[indexForMethod].comments.unshift(commentObj);
 
     setProfileDetails(newProfileDetails);
+    setInput("");
   }
 
   function deleteComment(index) {
@@ -71,9 +71,13 @@ const PostComments = ({ post, authorEmail, indexForMethod }) => {
     <Box sx={{ mt: 2 }}>
       <Typography>Leave your comment!</Typography>
 
-      <Box sx={{ display: "flex", height:'fit-content' }}>
+      <Box sx={{ display: "flex", height: "fit-content" }}>
         {" "}
-        <textarea style={{ width: "75%", whiteSpace:'no-wrap', padding:'2%' }} onChange={handleInput} />
+        <textarea
+          style={{ width: "75%", whiteSpace: "no-wrap", padding: "2%" }}
+          onChange={handleInput}
+          value={input}
+        />
         <Button
           sx={{
             width: "20%",
@@ -99,90 +103,91 @@ const PostComments = ({ post, authorEmail, indexForMethod }) => {
       <Typography>Comments</Typography>
 
       {profileDetails.posts[indexForMethod].comments?.map((comment, index) => {
-
-        const findUser = profiles.find((profile)=> profile.user === comment.user )
+        const findUser = profiles.find(
+          (profile) => profile.user === comment.user
+        );
         if (findUser) {
-
-     return   <Box
-          key={index}
-          sx={{
-            borderBottom: "1px solid lightgrey",
-            py: 3,
-            display: "flex",
-            alignItems: "flex-start",
-          }}
-        >
-          {" "}
-          <img
-            width="50px"
-            height="50px"
-            onClick={() => navigate(`/profile/${findUser.user}`)}
-            src={findUser.avatar}
-            alt=""
-            style={{ width: "8%", borderRadius: "50%", cursor: "pointer" }}
-          />
-          <Box sx={{ ml: 2, width: "100%" }}>
-            <Box sx={{ display: "flex" }}>
-              <Typography
-                sx={{ cursor: "pointer", width: "fit-content" }}
-                onClick={() => navigate(`/profile/${findUser.user}`)}
-              >
-                {findUser.username}
-              </Typography>
-
-              <Typography
-                sx={{
-                  fontSize: 16,
-                  color: "grey",
-                  fontFamily: "Playfair Display",
-                  ml: 2,
-                }}
-              >
-                {comment.date}
-              </Typography>
-            </Box>
-
-            <Typography
+          return (
+            <Box
+              key={index}
               sx={{
-                width: "85%",
-                wordWrap: "break-word",
-                fontFamily: "Playfair Display",
-                mt: 1,
-                mb: 2,
+                borderBottom: "1px solid lightgrey",
+                py: 3,
+                display: "flex",
+                alignItems: "flex-start",
               }}
             >
-              {comment.comment}
-            </Typography>
-            {findUser.user == email ? (
-              <Button
-                onClick={() => {
-                  deleteComment(index);
-                  saveEditedProfile(profile.id, profileDetails);
-                }}
-                sx={{
-                  width: "10%",
-                  fontSize: 13,
-                  color: "",
-                  display: "block",
-                  backgroundColor: "#CDB4DB",
-                  textTransform: "lowercase",
-                  borderRadius: "30px",
-                  color: "white",
-                  ":hover": {
-                    color: "black",
-                  },
-                }}
-              >
-                delete
-              </Button>
-            ) : (
-              <></>
-            )}
-          </Box>
-        </Box>
-        } 
-        
-})}
+              {" "}
+              <img
+                width="50px"
+                height="50px"
+                onClick={() => navigate(`/profile/${findUser.user}`)}
+                src={findUser.avatar}
+                alt=""
+                style={{ width: "8%", borderRadius: "50%", cursor: "pointer" }}
+              />
+              <Box sx={{ ml: 2, width: "100%" }}>
+                <Box sx={{ display: "flex" }}>
+                  <Typography
+                    sx={{ cursor: "pointer", width: "fit-content" }}
+                    onClick={() => navigate(`/profile/${findUser.user}`)}
+                  >
+                    {findUser.username}
+                  </Typography>
+
+                  <Typography
+                    sx={{
+                      fontSize: 16,
+                      color: "grey",
+                      fontFamily: "Playfair Display",
+                      ml: 2,
+                    }}
+                  >
+                    {comment.date}
+                  </Typography>
+                </Box>
+
+                <Typography
+                  sx={{
+                    width: "85%",
+                    wordWrap: "break-word",
+                    fontFamily: "Playfair Display",
+                    mt: 1,
+                    mb: 2,
+                  }}
+                >
+                  {comment.comment}
+                </Typography>
+                {findUser.user == email ? (
+                  <Button
+                    onClick={() => {
+                      deleteComment(index);
+                      saveEditedProfile(profile.id, profileDetails);
+                    }}
+                    sx={{
+                      width: "10%",
+                      fontSize: 13,
+                      color: "",
+                      display: "block",
+                      backgroundColor: "#CDB4DB",
+                      textTransform: "lowercase",
+                      borderRadius: "30px",
+                      color: "white",
+                      ":hover": {
+                        color: "black",
+                      },
+                    }}
+                  >
+                    delete
+                  </Button>
+                ) : (
+                  <></>
+                )}
+              </Box>
+            </Box>
+          );
+        }
+      })}
     </Box>
   );
 };

@@ -3,11 +3,15 @@ import HomePage from "../components/HomePage/HomePage";
 import Profile from "../components/Profile/Profile";
 import EditPost from "../components/WritePost/EditPost";
 import AuthPage from "../pages/AuthPage";
+import CartPage from "../pages/CartPage";
+import DeletedProfilePage from "../pages/DeletedProfilePage";
 import EditPostPage from "../pages/EditPostPage";
 import EditProfilePage from "../pages/EditProfilePage";
+import OurAuthorsPage from "../pages/OurAuthorsPage";
 import PostPage from "../pages/PostPage";
 import ProfilePage from "../pages/ProfilePage";
 import SetProfilePage from "../pages/SetProfilePage";
+import ShopPage from "../pages/ShopPage";
 import WritePostPage from "../pages/WritePostPage";
 
 const MainRoutes = () => {
@@ -20,6 +24,10 @@ const MainRoutes = () => {
     { link: "/editpost/:index", element: <EditPostPage />, id: 6 },
     { link: "/post/:email/:index", element: <PostPage />, id: 7 },
     { link: "/editprofile/:id", element: <EditProfilePage />, id: 8 },
+    { link: "/deletedprofile", element: <DeletedProfilePage />, id: 9 },
+    { link: "/ourauthors", element: <OurAuthorsPage />, id: 10 },
+    { link: "/shop", element: <ShopPage />, id: 11 },
+    { link: "/cart", element: <CartPage />, id: 112 },
   ];
 
   return (

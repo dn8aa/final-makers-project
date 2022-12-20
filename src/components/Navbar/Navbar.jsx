@@ -38,6 +38,7 @@ function Navbar() {
   // }, []);
 
   // console.log(findID());
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -62,6 +63,24 @@ function Navbar() {
     user: { email },
     handleLogout,
   } = useAuth();
+
+  console.log(email);
+
+  const { saveEditedProfile, profiles, getProfiles } = useSetProfile();
+
+  const profile = profiles.find((profile) => profile.user === email);
+  // console.log(profile);
+
+  React.useEffect(() => {
+    getProfiles();
+  }, []);
+
+  // if (!profile) {
+  //   return <div>loading</div>;
+  // }
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   return (
     <AppBar
@@ -187,6 +206,39 @@ function Navbar() {
             >
               Write
             </Button>
+            <Button
+              onClick={() => {
+                handleCloseNavMenu();
+                navigate("/ourauthors");
+                refreshPage();
+              }}
+              sx={{
+                borderRadius: "30px",
+                my: 2,
+                color: "white",
+                display: "block",
+                color: "black",
+                textTransform: "lowercase",
+              }}
+            >
+              Our Authors
+            </Button>
+            <Button
+              onClick={() => {
+                handleCloseNavMenu();
+                navigate("/shop");
+              }}
+              sx={{
+                borderRadius: "30px",
+                my: 2,
+                color: "white",
+                display: "block",
+                color: "black",
+                textTransform: "lowercase",
+              }}
+            >
+              Shop
+            </Button>
             {!email ? (
               <>
                 {" "}
@@ -231,12 +283,16 @@ function Navbar() {
               <></>
             )}
           </Box>
-
+          <Box>jhjk</Box>
           {email ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  {!email ? (
+                    <></>
+                  ) : (
+                    <Avatar alt="Remy Sharp" src={profile?.avatar} />
+                  )}
                 </IconButton>
               </Tooltip>
               <Menu
@@ -264,6 +320,17 @@ function Navbar() {
                   }}
                 >
                   <Typography textAlign="center">Profile</Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleCloseUserMenu();
+                    // handleLogout();
+                    navigate("/cart");
+                  }}
+                >
+                  <Box>
+                    <Typography textAlign="left">Cart</Typography>
+                  </Box>
                 </MenuItem>
                 <MenuItem
                   onClick={() => {

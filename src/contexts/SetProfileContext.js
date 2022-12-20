@@ -7,6 +7,9 @@ import {
   getDoc,
   updateDoc,
   deleteDoc,
+  query,
+  orderBy,
+  where,
 } from "firebase/firestore";
 import { db } from "../fire";
 import { PROFILE } from "../helpers/consts";
@@ -30,6 +33,19 @@ function reducer(state = INIT_STATE, action) {
       return state;
   }
 }
+// export default {
+
+//   root: true,
+//   env: {
+//     es6: true,
+//     node: true,
+//   },
+//   extends: ["eslint:recommended", "google"],
+//   rules: {
+//     quotes: ["error", "double"],
+//   },
+// };
+
 
 const SetProfileContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
@@ -78,6 +94,26 @@ const SetProfileContextProvider = ({ children }) => {
     getProfiles();
   }
 
+  //! rating
+  
+  async function sortData() {
+    const authorsCollectioRef = collection(db, "authors");
+    const q = query(authorsCollectioRef, where("username", '==', 'strawberry'));
+    let sort = [];
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        sort.push(doc.data());
+    });
+    console.log(sort);
+    dispatch({
+      type: PROFILE.GET_PROFILES,
+      payload: sort,
+    });
+  }
+
+
+
+
   const values = {
     createProfile,
     getProfiles,
@@ -85,7 +121,8 @@ const SetProfileContextProvider = ({ children }) => {
     getProfileDetails,
     profileDetails: state.profileDetails,
     saveEditedProfile,
-    deleteProfile
+    deleteProfile,
+    sortData
   };
 
   return (

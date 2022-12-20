@@ -6,7 +6,6 @@ import { useSetProfile } from "../../contexts/SetProfileContext";
 import fire from "../../fire";
 
 const SetProfile = () => {
-  
   const navigate = useNavigate();
 
   // var user = fire.auth().currentuser;
@@ -34,11 +33,12 @@ const SetProfile = () => {
     user: "",
     aboutuser: "",
     avatar: "",
-    followers: 0,
-    following: 0,
+    followers: [],
+    following: [],
     posts: [],
     rating: {},
-    premium:false
+    premium: false,
+    score: "",
   });
 
   const handleInp = (e) => {
@@ -75,7 +75,7 @@ const SetProfile = () => {
           type="button"
           onClick={() => {
             createProfile(profile);
-           
+
             navigate("/");
 
             console.log(profiles);
