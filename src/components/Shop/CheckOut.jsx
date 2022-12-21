@@ -15,16 +15,7 @@ const CheckOut = () => {
           marginBottom: "3%",
         }}
       />
-      <input
-        placeholder="address"
-        style={{
-          display: "block",
-          margin: "auto",
-          padding: "5%",
-          borderRadius: "30px",
-          border: "1px solid grey",
-        }}
-      />
+
       <Button
         sx={{
           margin: "auto",

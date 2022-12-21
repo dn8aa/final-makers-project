@@ -4,17 +4,197 @@ import { useSetProfile } from "../../contexts/SetProfileContext";
 import HomePagePostCard from "./HomePagePostCard";
 
 const HomePagePosts = ({ profiles }) => {
+  const {
+    all,
+    setAll,
+    mentalHealth,
+    setMentalHealth,
+    culture,
+    setCulture,
+    politics,
+    setPolitics,
+    technology,
+    setTechnology,
+    travel,
+    setTravel,
+  } = useSetProfile();
+  // useEffect(() => {
+  //   renderAll();
+  // }, [all]);
+
+  function renderAll() {
+    console.log("djk");
+    if (all) {
+      return profiles?.map((user, index) => (
+        <Box
+          sx={{ display: "flex", flexDirection: "column-reverse" }}
+          key={index}
+        >
+          {user.posts.map((post, index) => {
+            const findUser = profiles.find(
+              (profile) => profile.user === post.user
+            );
+            if (findUser) {
+              return (
+                <HomePagePostCard
+                  post={post}
+                  key={index}
+                  index={index}
+                  findUser={findUser}
+                />
+              );
+            }
+          })}
+        </Box>
+      ));
+    }
+  }
+
+  function renderMentalHealth() {
+    if (mentalHealth) {
+      return profiles?.map((user, index) => (
+        <div key={index}>
+          {user.posts
+            .filter((post) => post.topic == "mentalhealth")
+            .map((post, index) => {
+              const findUser = profiles.find(
+                (profile) => profile.user === post.user
+              );
+              if (findUser) {
+                return (
+                  <HomePagePostCard
+                    post={post}
+                    key={index}
+                    index={index}
+                    findUser={findUser}
+                  />
+                );
+              }
+            })}
+        </div>
+      ));
+    }
+  }
+  function renderCulture() {
+    if (culture) {
+      return profiles?.map((user, index) => (
+        <div key={index}>
+          {user.posts
+            .filter((post) => post.topic == "culture")
+            .map((post, index) => {
+              const findUser = profiles.find(
+                (profile) => profile.user === post.user
+              );
+              if (findUser) {
+                return (
+                  <HomePagePostCard
+                    post={post}
+                    key={index}
+                    index={index}
+                    findUser={findUser}
+                  />
+                );
+              }
+            })}
+        </div>
+      ));
+    }
+  }
+  function renderPolitics() {
+    if (politics) {
+      return profiles?.map((user, index) => (
+        <div key={index}>
+          {user.posts
+            .filter((post) => post.topic == "politics")
+            .map((post, index) => {
+              const findUser = profiles.find(
+                (profile) => profile.user === post.user
+              );
+              if (findUser) {
+                return (
+                  <HomePagePostCard
+                    post={post}
+                    key={index}
+                    index={index}
+                    findUser={findUser}
+                  />
+                );
+              }
+            })}
+        </div>
+      ));
+    }
+  }
+  function renderTechnology() {
+    if (technology) {
+      return profiles?.map((user, index) => (
+        <div key={index}>
+          {user.posts
+            .filter((post) => post.topic == "technology")
+            .map((post, index) => {
+              const findUser = profiles.find(
+                (profile) => profile.user === post.user
+              );
+              if (findUser) {
+                return (
+                  <HomePagePostCard
+                    post={post}
+                    key={index}
+                    index={index}
+                    findUser={findUser}
+                  />
+                );
+              }
+            })}
+        </div>
+      ));
+    }
+  }
+
+  function renderTravel() {
+    if (travel) {
+      return profiles?.map((user, index) => (
+        <div key={index}>
+          {user.posts
+            .filter((post) => post.topic == "travel")
+            .map((post, index) => {
+              const findUser = profiles.find(
+                (profile) => profile.user === post.user
+              );
+              if (findUser) {
+                return (
+                  <HomePagePostCard
+                    post={post}
+                    key={index}
+                    index={index}
+                    findUser={findUser}
+                  />
+                );
+              }
+            })}
+        </div>
+      ));
+    }
+  }
+
   return (
     <Box
       sx={{
-        width: "70%",
+        width: "100%",
         pt: 5,
-        borderRight: "1px solid lightgrey",
         minHeight: "100vh",
       }}
     >
       <Box sx={{ display: "flex", flexWrap: "wrap", mb: 3 }}>
         <Button
+          onClick={() => {
+            setAll(true);
+            setMentalHealth(false);
+            setCulture(false);
+            setPolitics(false);
+            setTechnology(false);
+            setTravel(false);
+          }}
           sx={{
             fontSize: 16,
             m: 1,
@@ -35,6 +215,14 @@ const HomePagePosts = ({ profiles }) => {
           all
         </Button>
         <Button
+          onClick={() => {
+            setAll(false);
+            setMentalHealth(true);
+            setCulture(false);
+            setPolitics(false);
+            setTechnology(false);
+            setTravel(false);
+          }}
           sx={{
             m: 1,
             fontSize: 16,
@@ -53,6 +241,14 @@ const HomePagePosts = ({ profiles }) => {
           mental health
         </Button>
         <Button
+          onClick={() => {
+            setAll(false);
+            setMentalHealth(false);
+            setCulture(true);
+            setPolitics(false);
+            setTechnology(false);
+            setTravel(false);
+          }}
           sx={{
             m: 1,
             fontSize: 16,
@@ -72,6 +268,14 @@ const HomePagePosts = ({ profiles }) => {
           culture
         </Button>
         <Button
+          onClick={() => {
+            setAll(false);
+            setMentalHealth(false);
+            setCulture(false);
+            setPolitics(false);
+            setTechnology(true);
+            setTravel(false);
+          }}
           sx={{
             m: 1,
             fontSize: 16,
@@ -91,6 +295,14 @@ const HomePagePosts = ({ profiles }) => {
           technology
         </Button>
         <Button
+          onClick={() => {
+            setAll(false);
+            setMentalHealth(false);
+            setCulture(false);
+            setPolitics(true);
+            setTechnology(false);
+            setTravel(false);
+          }}
           sx={{
             m: 1,
             fontSize: 16,
@@ -110,6 +322,14 @@ const HomePagePosts = ({ profiles }) => {
           politics
         </Button>
         <Button
+          onClick={() => {
+            setAll(false);
+            setMentalHealth(false);
+            setCulture(false);
+            setPolitics(false);
+            setTechnology(false);
+            setTravel(true);
+          }}
           sx={{
             m: 1,
             fontSize: 16,
@@ -128,25 +348,12 @@ const HomePagePosts = ({ profiles }) => {
           travel
         </Button>
       </Box>
-      {profiles?.map((user, index) => (
-        <div key={index}>
-          {user.posts.map((post, index) => {
-            const findUser = profiles.find(
-              (profile) => profile.user === post.user
-            );
-            if (findUser) {
-              return (
-                <HomePagePostCard
-                  post={post}
-                  key={index}
-                  index={index}
-                  findUser={findUser}
-                />
-              );
-            }
-          })}
-        </div>
-      ))}
+      {renderAll()}
+      {renderMentalHealth()}
+      {renderCulture()}
+      {renderPolitics()}
+      {renderTechnology()}
+      {renderTravel()}
     </Box>
   );
 };

@@ -9,7 +9,7 @@ import styled from "@emotion/styled";
 import { useAuth } from "../../contexts/AuthContext";
 import { useSetProfile } from "../../contexts/SetProfileContext";
 
-const AuthorsCard = ( props, {profile}) => {
+const AuthorsCard = (props, { profile }) => {
   const {
     user: { email },
     handleLogout,
@@ -36,7 +36,7 @@ const AuthorsCard = ( props, {profile}) => {
     getProfiles();
   }, []);
 
-//   console.log(userProfile);
+  //   console.log(userProfile);
   const [userProfileDetails, setUserProfileDetails] = useState(userProfile);
   useEffect(() => {
     setUserProfileDetails(userProfile);
@@ -90,54 +90,20 @@ const AuthorsCard = ( props, {profile}) => {
   }
 
   const navigate = useNavigate();
-  function renderFollowButton() {
-    if (email != props.hit.user) {
-      return props.hit.followers?.includes(email) == true ? (
-        <>
-          {" "}
-          <Typography
-            onClick={() => {
-              follow();
-            }}
-            sx={{
-              ml: "10%",
-              mt: 2,
-              width: "fit-content",
-              color: "#E98A15",
-              cursor: "pointer",
-              ":hover": { color: "black" },
-            }}
-          >
-            unfollow
-          </Typography>
-        </>
-      ) : (
-        <Typography
-          onClick={() => {
-            follow();
-          }}
-          sx={{
-            ml: "10%",
-            mt: 2,
-            width: "fit-content",
-            color: "#a7c957",
-            cursor: "pointer",
-            ":hover": { color: "black" },
-          }}
-        >
-          follow
-        </Typography>
-      );
-    } else {
-      return <Box sx={{ ml: "10%" }}>your profile</Box>;
-    }
-  }
+
   if (!userProfile) {
     return <div>loading</div>;
   }
 
   return (
-    <Box sx={{ m: 3, display: "flex", alignItems: "flex-end" }}>
+    <Box
+      sx={{
+        m: 3,
+        display: "flex",
+        alignItems: "flex-end",
+        justifyContent: "space-between",
+      }}
+    >
       <Box
         onClick={() => navigate(`/profile/${props.hit.user}`)}
         sx={{ cursor: "pointer", width: "50%" }}
@@ -159,6 +125,11 @@ const AuthorsCard = ( props, {profile}) => {
           </Box>
         </Box>
       </Box>
+      {email != props.hit.user ? (
+        <></>
+      ) : (
+        <Box sx={{ ml: "10%" }}>your profile</Box>
+      )}
       <Box
         sx={{
           display: "flex",
@@ -178,7 +149,6 @@ const AuthorsCard = ( props, {profile}) => {
           emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
         />
       </Box>
-      {renderFollowButton()}
     </Box>
   );
 };

@@ -137,11 +137,55 @@ function Navbar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <Button
+                onClick={() => {
+                  handleCloseNavMenu();
+                  navigate("/writepost");
+                }}
+                sx={{
+                  borderRadius: "30px",
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  color: "black",
+                  textTransform: "lowercase",
+                }}
+              >
+                Write
+              </Button>
+              <Button
+                onClick={() => {
+                  handleCloseNavMenu();
+                  navigate("/ourauthors");
+                  refreshPage();
+                }}
+                sx={{
+                  borderRadius: "30px",
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  color: "black",
+                  textTransform: "lowercase",
+                }}
+              >
+                Our Authors
+              </Button>
+              <Button
+                onClick={() => {
+                  handleCloseNavMenu();
+                  navigate("/shop");
+                }}
+                sx={{
+                  borderRadius: "30px",
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  color: "black",
+                  textTransform: "lowercase",
+                }}
+              >
+                Shop
+              </Button>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -164,32 +208,6 @@ function Navbar() {
             MEDIUM
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{
-                borderRadius: "30px",
-                my: 2,
-                color: "white",
-                display: "block",
-                color: "black",
-                textTransform: "lowercase",
-              }}
-            >
-              Our story
-            </Button>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{
-                borderRadius: "30px",
-                my: 2,
-                color: "white",
-                display: "block",
-                color: "black",
-                textTransform: "lowercase",
-              }}
-            >
-              Membership
-            </Button>
             <Button
               onClick={() => {
                 handleCloseNavMenu();
@@ -242,22 +260,6 @@ function Navbar() {
             {!email ? (
               <>
                 {" "}
-                <Button
-                  onClick={() => {
-                    handleCloseNavMenu();
-                    navigate("/auth");
-                  }}
-                  sx={{
-                    my: 2,
-                    color: "white",
-                    display: "block",
-                    color: "black",
-                    textTransform: "lowercase",
-                    borderRadius: "30px",
-                  }}
-                >
-                  Sign in
-                </Button>
                 <Button
                   onClick={() => {
                     handleCloseNavMenu();
@@ -321,17 +323,7 @@ function Navbar() {
                 >
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    handleCloseUserMenu();
-                    // handleLogout();
-                    navigate("/cart");
-                  }}
-                >
-                  <Box>
-                    <Typography textAlign="left">Cart</Typography>
-                  </Box>
-                </MenuItem>
+
                 <MenuItem
                   onClick={() => {
                     handleCloseUserMenu();

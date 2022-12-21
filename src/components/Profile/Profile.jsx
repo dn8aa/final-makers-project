@@ -203,7 +203,7 @@ const Profile = ({ profile, userEmail }) => {
   return (
     <Box sx={{ width: "30%", mt: 5 }}>
       <Box sx={{ pl: 5 }}>
-        <Button
+        {/* <Button
           sx={{
             width: "100%",
 
@@ -220,7 +220,7 @@ const Profile = ({ profile, userEmail }) => {
         >
           {" "}
           Get unlimited access
-        </Button>
+        </Button> */}
 
         <img
           src={profile.avatar}
@@ -325,7 +325,9 @@ const Profile = ({ profile, userEmail }) => {
             <Typography
               onClick={() => navigate(`/editprofile/${profile.id}`)}
               sx={{
-                width: "fit-content",
+                width: {
+                  xs:'50%', md:"fit-content"
+                },
                 color: "#E98A15",
                 cursor: "pointer",
                 ":hover": { color: "#F1C0E8" },

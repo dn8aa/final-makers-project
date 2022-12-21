@@ -58,7 +58,7 @@ const HomePagePostCard = ({ post, index, findUser }) => {
         <img
           width="50px"
           height="50px"
-          src={findUser.avatar}
+          src={findUser?.avatar}
           alt=""
           style={{ borderRadius: "50%", cursor: "pointer" }}
         />
@@ -66,7 +66,7 @@ const HomePagePostCard = ({ post, index, findUser }) => {
           sx={{ ml: 1, cursor: "pointer" }}
           onClick={() => navigate(`/profile/${post.user}`)}
         >
-          {findUser.username}
+          {findUser?.username}
         </Typography>
       </Box>
       <Typography

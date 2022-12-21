@@ -8,8 +8,7 @@ import ProfilePosts from "../components/Profile/ProfilePosts";
 const ProfilePage = () => {
   const { email } = useParams();
 
-  const { profiles, getProfiles } =
-    useSetProfile();
+  const { profiles, getProfiles } = useSetProfile();
 
   const profile = profiles.find((profile) => profile.user === email);
   // console.log(profile);
@@ -25,18 +24,21 @@ const ProfilePage = () => {
     <Box
       sx={{
         display: "flex",
+        flexDirection: {
+          xs: "column-reverse",
+          md: "row",
+        },
+
         mx: {
           xs: 5,
           sm: 15,
           md: 20,
-          lg:35
+          lg: 35,
         },
       }}
     >
-
-    
       <ProfilePosts profile={profile} userEmail={email} />
-      <Profile profile={profile}  />
+      <Profile profile={profile} />
     </Box>
   );
 };

@@ -4,19 +4,37 @@
 #hit {
   list-style-type: none;
 }
+
 .pagination {
   display: flex;
+  color: "black";
+  margin: 50%;
+  margin-bottom: 0;
+}
+
+.ais-Pagination-link {
+  color: "violet";
+  text-decoration: none;
+}
+
+.ais-Pagination-link:active {
+  color: "grey";
 }
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  color: "black";
+}
+a {
+  text-decoration: none;
+  color: "black";
 }
 .ais-Pagination-list {
   display: flex;
   font-size: 25px;
 }
-.ais-Paginattion-item{
+.ais-Paginattion-item {
   width: 20px;
 }
 .App-logo {
@@ -44,6 +62,7 @@ ul {
 .App-link {
   color: #61dafb;
 }
+
 
 @keyframes App-logo-spin {
   from {

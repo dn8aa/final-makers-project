@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useSearchParams } from "react-router-dom";
 import { useSetProfile } from "../../contexts/SetProfileContext";
+import { SearchBox } from "react-instantsearch-dom";
 
 const HomePageRight = () => {
   // useEffect(() => {
@@ -38,6 +39,7 @@ const HomePageRight = () => {
   return (
     <Box sx={{ width: "30%", mt: 5 }}>
       <Box sx={{ pl: 5 }}>fffffffffffff</Box>
+      
     
     </Box>
   );

@@ -17,7 +17,6 @@ const HomePage = () => {
 
   console.log(profiles);
 
-  
   if (!profiles) {
     return <div>loading</div>;
   }
@@ -40,9 +39,10 @@ const HomePage = () => {
       }}
     >
       <HomePagePosts profiles={profiles} />
-      <HomePageRight />
     </Box>
   );
 };
 
 export default HomePage;
+
+

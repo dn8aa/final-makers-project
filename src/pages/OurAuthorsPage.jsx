@@ -4,6 +4,7 @@ import ProductPagination from "../components/OurAuthors/OuAuthorsPagination";
 import OurAuthors from "../components/OurAuthors/OurAuthors";
 import { useSetProfile } from "../contexts/SetProfileContext";
 import algoliasearch from "algoliasearch/lite";
+import { Box } from "@mui/material";
 
 const searchClient = algoliasearch(
   "I9FX7TPWGQ",
@@ -15,41 +16,16 @@ const OurAuthorsPage = () => {
     window.location.reload(false);
   }
 
-  // useEffect(() => {
-  //   refreshPage();
-  // }, []);
-  //   const { profiles, getProfiles } = useSetProfile();
-
-  //   useEffect(() => {
-  //     getProfiles();
-  //   }, []);
-  //   const [page, setPage] = useState(1);
-  //   const itemsPerPage = 12;
-  //   const count = Math.ceil(profiles.length / itemsPerPage);
-
-  //   function currentData() {
-  //     const begin = (page - 1) * itemsPerPage;
-  //     const end = begin + itemsPerPage;
-  //     return profiles.slice(begin, end);
-  //   }
-
   return (
-    <div>
+    <Box>
       <InstantSearch indexName="authors" searchClient={searchClient}>
-        <SortBy
-          defaultRefinement="authors"
-          items={[
-            { value: "authors", label: "Featured" },
-            { value: "authors_score_asc", label: "Price asc." },
-            { value: "authors_score_desc", label: "Price desc." },
-          ]}
-        />
-        <SearchBox />
+        <div align="center" style={{ marginTop: "3%" }}>
+          {" "}
+          <SearchBox />
+        </div>
         <OurAuthors />
       </InstantSearch>
-
-      {/* <ProductPagination page={page} setPage={setPage} count={count} /> */}
-    </div>
+    </Box>
   );
 };
 
