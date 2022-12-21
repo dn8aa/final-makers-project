@@ -41,14 +41,15 @@ const ProfilePostCard = ({ post, index, userEmail }) => {
     let newProfileDetails = { ...profileDetails };
 
     if (newProfileDetails.posts[index].likes?.includes(email) != true) {
-      return newProfileDetails.posts[index].likes?.push(email);
+      newProfileDetails.posts[index].likes?.push(email);
     } else {
       let likeIndex = newProfileDetails.posts[index].likes?.indexOf(email);
       console.log(likeIndex);
-      return newProfileDetails.posts[index].likes.splice(likeIndex, 1);
+      newProfileDetails.posts[index].likes.splice(likeIndex, 1);
     }
 
     setProfileDetails(newProfileDetails);
+    saveEditedProfile(profile.id, profileDetails);
   }
 
   // console.log(post.likes);
@@ -57,7 +58,7 @@ const ProfilePostCard = ({ post, index, userEmail }) => {
       <Box
         sx={{ display: "flex", mb: 1, justifyContent: "space-between", mr: 6 }}
       >
-        <Typography>{post.date}</Typography>
+        <Typography sx={{ mr: 5 }}>{post.date}</Typography>
         {email === userEmail ? (
           <Box sx={{ display: "flex" }}>
             {" "}
@@ -145,9 +146,7 @@ const ProfilePostCard = ({ post, index, userEmail }) => {
       <Box sx={{ display: "flex", mt: 2 }}>
         <Box
           onClick={() => {
-            console.log(profileDetails.posts[index].likes);
             like();
-            saveEditedProfile(profile.id, profileDetails);
           }}
           sx={{ display: "flex", cursor: "pointer" }}
         >

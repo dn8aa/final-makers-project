@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -10,6 +10,7 @@ import { useSetProfile } from "../../contexts/SetProfileContext";
 const Post = ({ profile, post, userEmail, index }) => {
   console.log(post);
   const { saveEditedProfile } = useSetProfile();
+
   const navigate = useNavigate();
 
   const {
@@ -20,25 +21,76 @@ const Post = ({ profile, post, userEmail, index }) => {
   useEffect(() => {
     setProfileDetails(profile);
   }, [profile]);
-  
 
   function like() {
     let newProfileDetails = { ...profileDetails };
 
     if (newProfileDetails.posts[index].likes?.includes(email) != true) {
-       newProfileDetails.posts[index].likes?.push(email);
-      
+      newProfileDetails.posts[index].likes?.push(email);
     } else {
       let likeIndex = newProfileDetails.posts[index].likes?.indexOf(email);
       console.log(likeIndex);
-       newProfileDetails.posts[index].likes.splice(likeIndex, 1);
+      newProfileDetails.posts[index].likes.splice(likeIndex, 1);
     }
 
+    setProfileDetails(newProfileDetails);
+  }
+  function deletePost(index) {
+    let newProfileDetails = {
+      ...profile,
+    };
+
+    newProfileDetails.posts.splice(index, 1);
     setProfileDetails(newProfileDetails);
   }
 
   return (
     <Box>
+      {email === userEmail ? (
+        <Box sx={{ display: "flex",ml:'75%'  }}>
+          {" "}
+          <Button
+            sx={{
+              color: "",
+              display: "block",
+              backgroundColor: "#CDB4DB",
+              textTransform: "lowercase",
+              borderRadius: "30px",
+              color: "white",
+              ":hover": {
+                color: "black",
+              },
+              mr: 1,
+            }}
+            onClick={() => {
+              deletePost(index);
+              saveEditedProfile(profileDetails.id, profileDetails);
+            }}
+          >
+            delete
+          </Button>
+          <Button
+            sx={{
+              color: "",
+              display: "block",
+              backgroundColor: "#CDB4DB",
+              textTransform: "lowercase",
+              borderRadius: "30px",
+              color: "white",
+              ":hover": {
+                color: "black",
+              },
+            }}
+            onClick={() => {
+              navigate(`/editpost/${index}`);
+            }}
+          >
+            edit
+          </Button>
+        </Box>
+      ) : (
+        <></>
+      )}
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
         <img
           width="50px"

@@ -16,9 +16,15 @@ const ProfilePosts = ({ profile, userEmail }) => {
   return (
     <Box
       sx={{
-        width: "70%",
+        width: {
+          xs: "100%",
+          md: "70%",
+        },
         pt: 5,
-        borderRight: "1px solid lightgrey",
+        borderRight: {
+          xs: "none",
+          md: "1px solid lightgrey",
+        },
         minHeight: "100vh",
       }}
     >

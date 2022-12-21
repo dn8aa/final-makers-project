@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useReducer } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import {
   addDoc,
   collection,
@@ -46,7 +52,6 @@ function reducer(state = INIT_STATE, action) {
 //   },
 // };
 
-
 const SetProfileContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
@@ -63,9 +68,10 @@ const SetProfileContextProvider = ({ children }) => {
     // console.log(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   }
 
-  // useEffect(() => {
-  //   getProfiles();
-  // }, []);
+  useEffect(() => {
+    getProfiles();
+    console.log(state.profiles);
+  }, []);
 
   async function createProfile(newProfile) {
     console.log(newProfile);
@@ -95,14 +101,14 @@ const SetProfileContextProvider = ({ children }) => {
   }
 
   //! rating
-  
+
   async function sortData() {
     const authorsCollectioRef = collection(db, "authors");
-    const q = query(authorsCollectioRef, where("username", '==', 'strawberry'));
+    const q = query(authorsCollectioRef, where("username", "==", "strawberry"));
     let sort = [];
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-        sort.push(doc.data());
+      sort.push(doc.data());
     });
     console.log(sort);
     dispatch({
@@ -111,8 +117,17 @@ const SetProfileContextProvider = ({ children }) => {
     });
   }
 
+  const [all, setAll] = useState(true);
+  const [mentalHealth, setMentalHealth] = useState(false);
+  const [culture, setCulture] = useState(false);
+  const [politics, setPolitics] = useState(false);
+  const [technology, setTechnology] = useState(false);
+  const [travel, setTravel] = useState(false);
 
-
+  useEffect(() => {
+    getProfiles();
+    console.log(state.profiles);
+  }, []);
 
   const values = {
     createProfile,
@@ -122,7 +137,19 @@ const SetProfileContextProvider = ({ children }) => {
     profileDetails: state.profileDetails,
     saveEditedProfile,
     deleteProfile,
-    sortData
+    sortData,
+    all,
+    setAll,
+    mentalHealth,
+    setMentalHealth,
+    culture,
+    setCulture,
+    politics,
+    setPolitics,
+    technology,
+    setTechnology,
+    travel,
+    setTravel,
   };
 
   return (

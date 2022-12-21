@@ -1,4 +1,10 @@
-import { Button, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -47,7 +53,7 @@ const EditPost = () => {
     let newProfileDetails = { ...profileDetails };
     newProfileDetails.posts.splice(index, 1);
 
-    newProfileDetails.posts.splice(index,0,post);
+    newProfileDetails.posts.splice(index, 0, post);
 
     setProfileDetails(newProfileDetails);
   }
@@ -59,41 +65,74 @@ const EditPost = () => {
   // console.log(profile.posts);
 
   return (
-    <Box>
-      <input
-        value={post.area}
-        onChange={handleInp}
-        placeholder="area"
-        name="area"
-      />
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
 
-      <input
-        value={post.cover}
-        onChange={handleInp}
-        placeholder="cover"
-        name="cover"
-      />
-      <input
-        value={post.title}
-        onChange={handleInp}
-        placeholder="title"
-        name="title"
-      />
-      <input
+        mx: {
+          xs: 5,
+          sm: 10,
+          lg: 35,
+        },
+        pb: 4,
+      }}
+    >
+      <Box sx={{ display: "flex", justifyContent: "space-between", my: 3 }}>
+        <input
+          value={post.title}
+          onChange={handleInp}
+          placeholder="title"
+          name="title"
+        />
+
+        <FormControl sx={{}}>
+          <Select
+            name="topic"
+            size="small"
+            onChange={handleInp}
+            defaultValue={"all"}
+          >
+            <MenuItem value={"all"}>all</MenuItem>
+            <MenuItem value={"mentalhealth"}>mental health</MenuItem>
+            <MenuItem value={"culture"}>culture</MenuItem>
+            <MenuItem value={"technology"}>technology</MenuItem>
+
+            <MenuItem value={"politics"}>politics</MenuItem>
+            <MenuItem value={"travel"}>travel</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+
+      <textarea
         value={post.text}
         onChange={handleInp}
         placeholder="text"
         name="text"
-        style={{ overflow: "visible", height: "fit-content" }}
+        style={{ overflow: "visible", height: "300px" }}
       />
 
       <Button
+        sx={{
+          margin: "auto",
+          mt: 3,
+          // ml: 2,
+          backgroundColor: "#90DBF4",
+          color: "white",
+          fontSize: 13,
+          textTransform: "lowercase",
+          borderRadius: "30px",
+          ":hover": {
+            color: "black",
+          },
+          width: "70%",
+        }}
         onClick={() => {
           changePost();
           saveEditedProfile(profileDetails.id, profileDetails);
           console.log(profileDetails.id);
           console.log(profileDetails);
-          navigate("/profile");
+          navigate(`/profile/${email}`);
         }}
       >
         Submit
