@@ -15,6 +15,9 @@ const ProductContextProvider = ({ children }) => {
   //   getProducts();
   useEffect(() => {
     getProducts();
+    return () => {
+
+    };
   }, []);
   console.log(products);
 
@@ -33,15 +36,15 @@ const ProductContextProvider = ({ children }) => {
 
     return finalLink;
   }
-//   console.log();
+  //   console.log();
 
-//   useEffect(() => {
-//     console.log(
-//       spotifyLinkChange(
-//         "https://open.spotify.com/track/16tU7M0qquqkou1MnipA9h?si=87bbd2e04a684873"
-//       )
-//     );
-//   }, []);
+  //   useEffect(() => {
+  //     console.log(
+  //       spotifyLinkChange(
+  //         "https://open.spotify.com/track/16tU7M0qquqkou1MnipA9h?si=87bbd2e04a684873"
+  //       )
+  //     );
+  //   }, []);
 
   const values = { products, getProducts, spotifyLinkChange };
   return (
